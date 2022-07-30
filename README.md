@@ -3,7 +3,8 @@
 
 #### DONE：
 * LAS-AT中的LAS_PGD_AT在ImageNet上的训练代码
+* LAS_PGD_AT在ImageNet上的模型测试代码
 
 
 #### TODO：
-* LAS_PGD_AT在ImageNet上的模型测试代码
+* 阅读相关对抗防御论文
