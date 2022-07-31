@@ -28,7 +28,7 @@ def get_args():
     parser = argparse.ArgumentParser('LAS_AT')
     # target model
     parser.add_argument('--batch-size', default=128, type=int)
-    parser.add_argument('--data-dir', default='/mnt/data_zcy/imagenet', type=str)
+    parser.add_argument('--data-dir', default='/home/amax/zcy/', type=str)
     parser.add_argument('--out-dir', default='LAS_AT', type=str, help='Output directory')
     parser.add_argument('--seed', default=0, type=int, help='Random seed')
     parser.add_argument('--target_model_lr', default=0.1, type=float, help='learning rate')
@@ -37,7 +37,6 @@ def get_args():
     parser.add_argument('--target_model_lr_min', default=0., type=float)
     parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
     parser.add_argument('--model', default='WideResNet', type=str, help='model name')
-
 
     parser.add_argument('--path', default='LAS_AT', type=str, help='model name')
 
