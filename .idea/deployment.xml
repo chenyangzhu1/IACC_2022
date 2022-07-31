@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="zcaoyao" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="amax@10.249.47.110:22" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="amax@10.249.47.110:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/amax/anaconda3/envs/zcy/codes/IACC_2022" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="zcaoyao">
         <serverdata>
           <mappings>

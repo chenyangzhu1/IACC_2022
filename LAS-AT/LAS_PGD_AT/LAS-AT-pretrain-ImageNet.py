@@ -1,6 +1,8 @@
 # encoding: utf-8
 import argparse
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
+from tqdm import tqdm
 import torchvision
 from torch.utils.data import DataLoader
 
@@ -27,8 +29,8 @@ from tensorboardX import SummaryWriter
 def get_args():
     parser = argparse.ArgumentParser('LAS_AT')
     # target model
-    parser.add_argument('--batch-size', default=128, type=int)
-    parser.add_argument('--data-dir', default='/home/amax/zcy/', type=str)
+    parser.add_argument('--batch-size', default=256, type=int)
+    parser.add_argument('--data-dir', default='/home/amax/anaconda3/envs/zcy/codes/imagenet/', type=str)
     parser.add_argument('--out-dir', default='LAS_AT', type=str, help='Output directory')
     parser.add_argument('--seed', default=0, type=int, help='Random seed')
     parser.add_argument('--target_model_lr', default=0.1, type=float, help='learning rate')
@@ -178,13 +180,13 @@ def MyNew_ImageNet_get_loaders_64(dir_, batch_size):
     # ])
 
     train_dataset = torchvision.datasets.ImageFolder(
-        root="/mnt/data_zcy/imagenet/ILSVRC2012_img_train/",
+        root="/home/amax/anaconda3/envs/zcy/codes/imagenet/ILSVRC2012_img_pretrain/",
         transform=data_transform)
     train_dataset_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0,
                                       pin_memory=True)
 
     val_dataset = torchvision.datasets.ImageFolder(
-        root="/mnt/data_zcy/imagenet/ILSVRC2012_img_val/",
+        root="/home/amax/anaconda3/envs/zcy/codes/imagenet/ILSVRC2012_img_val/",
         transform=data_transform)
 
     val_dataset_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=True)
@@ -639,10 +641,10 @@ def train(epoch):
     train_acc = 0
     train_n = 0
     logger.info('Epoch \t Seconds \t LR \t \t Train Loss \t Train Acc')
-    for batch_idx, (inputs, targets) in enumerate(train_loader):
+    loop = tqdm(enumerate(train_loader), total=len(train_loader))
+    for batch_idx, (inputs, targets) in loop:
         # if (batch_idx >= 2):
         #     break
-
         inputs, targets = inputs.to(device), targets.to(device)
 
         global curr_step
@@ -697,7 +699,7 @@ def train(epoch):
             Strategy_model.eval()
 
             action_list, policy_outputs, policy_prob, max_policy_outputs = select_action(Strategy_model, pocliy_inputs1)
-            print(policy_outputs)
+            # print(policy_outputs)
             # logger.info(policy_outputs)
             # print(policy_outputs)a
             adv_examples = Get_delta(pocliy_inputs1, targets, target_model, policy_outputs)
